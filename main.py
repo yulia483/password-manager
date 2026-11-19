@@ -1,12 +1,34 @@
+import random
+import string
 passwords=[]
 file_name= "passwords.txt"
+def gen():
+    """Генерирует случайный пароль заданной длины."""
+    x = input("Введите длину пароля (от 8 до 32): ").strip()
+    if not x.isdigit():
+        print("Ошибка: нужно ввести целое число!")
+        return ""
+
+    n = int(x)
+    if n < 8 or n > 32:
+        print("Пароль должен быть длиной от 8 до 32 символов")
+        return ""
+    s = string.ascii_letters + string.digits + "!@#$%&*"
+    p = ""
+    for i in range(n):
+        p += random.choice(s)
+
+    print("Сгенерированный пароль:", p)
+    return p
 def f():
     print("====Защищённый менеджер паролей====")
     key_str = input("Введите числовой мастер-ключ (например, 1234): ").strip()
     if not key_str.isdigit():
         print("Ошибка: мастер-ключ должен состоять из цифр!")
         return
+
     secret_key = int(key_str) % 500 + 1
+
     while True:
         print("\n====Менеджер паролей====")
         print("1. Сгенерировать пароль")
@@ -17,7 +39,7 @@ def f():
         print("0. Выход")
         choice = input("Выберите действие: ").strip()
         if choice == "1":
-            print("Функция генерации в разработке")
+            gen()
         elif choice == "2":
             print("Функция добавления в разработке")
         elif choice == "3":
