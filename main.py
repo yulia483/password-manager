@@ -2,8 +2,22 @@ import random
 import string
 passwords=[]
 file_name= "passwords.txt"
+def enc(t, k):
+    # Шифрует пароль сдвигом символов по ключу
+    r = ""
+    for ch in t:
+        r += chr(ord(ch) + k)
+    return r
+
+def dec(t, k):
+    # Расшифровывает пароль обратно
+    r = ""
+    for ch in t:
+        r += chr(ord(ch) - k)
+    return r
+
 def gen():
-    """Генерирует случайный пароль заданной длины."""
+    #Генерирует случайный пароль заданной длины
     x = input("Введите длину пароля (от 8 до 32): ").strip()
     if not x.isdigit():
         print("Ошибка: нужно ввести целое число!")
@@ -13,6 +27,7 @@ def gen():
     if n < 8 or n > 32:
         print("Пароль должен быть длиной от 8 до 32 символов")
         return ""
+
     s = string.ascii_letters + string.digits + "!@#$%&*"
     p = ""
     for i in range(n):
@@ -20,6 +35,7 @@ def gen():
 
     print("Сгенерированный пароль:", p)
     return p
+    
 def f():
     print("====Защищённый менеджер паролей====")
     key_str = input("Введите числовой мастер-ключ (например, 1234): ").strip()
